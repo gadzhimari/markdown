@@ -1,0 +1,32 @@
+{
+  "name": "@dlghq/markdown",
+  "version": "0.0.0",
+  "description": "Markdown for dialog projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "preversion": "npm test",
+    "postversion": "npm run publish",
+    "postpublish": "git push --follow-tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dialogs/markdown.git"
+  },
+  "author": "Nikita Gusakov <gusnkt@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/dialogs/markdown/issues"
+  },
+  "homepage": "https://github.com/dialogs/markdown#readme",
+  "dependencies": {
+    "highlight.js": "9.7.0",
+    "markdown-it": "8.0.0"
+  },
+  "devDependencies": {
+    "@dlghq/babel-preset-dialog": "2.3.2",
+    "html-minifier": "3.1.0",
+    "jest-cli": "16.0.1",
+    "markdown-it-testgen": "0.1.4"
+  }
+}

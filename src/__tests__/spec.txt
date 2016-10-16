@@ -1,0 +1,17 @@
+Simple link
+.
+dlg.im
+.
+<p><a href="http://dlg.im">dlg.im</a></p>
+.
+
+Simple blockquote
+.
+> hello
+answer
+.
+<blockquote>
+  <p>hello</p>
+</blockquote>
+<p>answer</p>
+.
