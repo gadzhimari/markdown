@@ -11,7 +11,8 @@ describe('markdown', () => {
     });
   }
 
-  const spec = path.join(__dirname, './spec.txt');
+  const spec = path.resolve(__dirname, 'spec.txt');
+
   testgen.load(spec, {}, ({ fixtures }) => {
     fixtures.forEach(({ header, first, second }) => {
       it(header, () => {

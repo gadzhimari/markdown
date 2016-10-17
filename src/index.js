@@ -3,21 +3,18 @@
  */
 
 import Markdown from 'markdown-it';
-import hljs from './highlight';
+import { highlight } from './highlight';
+import dialog from './plugin';
 
-const md = new Markdown({
+const md = new Markdown('default', {
+  highlight,
   html: false,
-  breaks: true,
   linkify: true,
-  typographer: false,
-  highlight(code) {
-    const { value } = hljs.highlightAuto(code);
-    return value;
-  }
+  typographer: false
 });
 
-function markdown(text: string): string {
-  return md.render(text);
-}
+md.use(dialog);
 
-export default markdown;
+const render = md.render.bind(md);
+
+export default render;

@@ -4,6 +4,11 @@
 
 const hljs = require('highlight.js/lib/highlight');
 
+export function highlight(code, language) {
+  const { value } = hljs.highlightAuto(code);
+  return value;
+}
+
 // hljs.registerLanguage('1c', require('highlight.js/lib/languages/1c'));
 // hljs.registerLanguage('accesslog', require('highlight.js/lib/languages/accesslog'));
 hljs.registerLanguage('actionscript', require('highlight.js/lib/languages/actionscript'));
@@ -159,5 +164,3 @@ hljs.registerLanguage('xl', require('highlight.js/lib/languages/xl'));
 hljs.registerLanguage('xquery', require('highlight.js/lib/languages/xquery'));
 hljs.registerLanguage('yaml', require('highlight.js/lib/languages/yaml'));
 // hljs.registerLanguage('zephir', require('highlight.js/lib/languages/zephir'));
-
-export default hljs;
