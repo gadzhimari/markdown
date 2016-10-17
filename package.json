@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "preversion": "npm test",
-    "postversion": "npm run publish",
+    "postversion": "npm publish",
     "postpublish": "git push --follow-tags"
   },
   "repository": {
