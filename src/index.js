@@ -5,6 +5,8 @@
 import Markdown from 'markdown-it';
 import { highlight } from './highlight';
 import dialog from './plugin';
+import parse from './parser';
+import decorators from './decorators';
 
 const md = new Markdown('default', {
   highlight,
@@ -16,5 +18,10 @@ const md = new Markdown('default', {
 md.use(dialog);
 
 const render = md.render.bind(md);
+
+export {
+  parse,
+  decorators
+};
 
 export default render;
