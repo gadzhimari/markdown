@@ -29,7 +29,7 @@ export function createRegexDecorator(name: string, regex: RegExp): Decorator {
   };
 }
 
-export function findBetween(char: string, text: string): Range[] {
+export function findBetween(char: string, text: string, replace?: boolean): Range[] {
   const ranges = [];
 
   let start = 0;
@@ -39,7 +39,11 @@ export function findBetween(char: string, text: string): Range[] {
     if (start >= 0) {
       end = text.indexOf(char, start + 1);
       if (end > 0) {
-        ranges.push({ start, end: end + 1 });
+        ranges.push({
+          start,
+          end: end + 1,
+          replace: replace ? text.slice(start + 1, end) : text.slice(start, end + 1)
+        });
         start = end + 1;
       } else {
         start = -1;
@@ -50,11 +54,11 @@ export function findBetween(char: string, text: string): Range[] {
   return ranges;
 }
 
-export function createBetweenDecorator(name: string, char: string): Decorator {
+export function createBetweenDecorator(name: string, char: string, replace?: boolean): Decorator {
   return {
     name,
     strategy(text) {
-      return findBetween(char, text);
+      return findBetween(char, text, replace);
     }
   };
 }
