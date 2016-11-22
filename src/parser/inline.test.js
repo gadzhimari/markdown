@@ -49,4 +49,37 @@ describe('inline parsing', () => {
       }
     ]);
   });
+  
+  it('should supports replace', () => {
+    const test = {
+      name: 'test',
+      strategy() {
+        return [
+          { start: 2, end: 5, replace: 'hello' },
+          { start: 8, end: 10, replace: 'world' }
+        ];
+      }
+    };
+
+    expect(parse('0123456789', [test])).toEqual([
+      {
+        type: 'text',
+        content: '01'
+      },
+      {
+        type: 'text',
+        content: 'hello',
+        highlight: 'test'
+      },
+      {
+        type: 'text',
+        content: '567'
+      },
+      {
+        type: 'text',
+        content: 'world',
+        highlight: 'test'
+      }
+    ]);
+  });
 });

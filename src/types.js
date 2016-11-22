@@ -5,7 +5,8 @@
 
 export type Range = {
   start: number,
-  end: number
+  end: number,
+  replace?: string
 };
 
 export type Strategy = (text: string) => Range[];
