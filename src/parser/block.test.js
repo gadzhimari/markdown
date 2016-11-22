@@ -71,6 +71,29 @@ describe('block parsing', () => {
     ]);
   });
 
+  it('should correctly split blockquote and paragraph', () => {
+    test('Hello, world\n> Some smart thoughts\nanother paragraph', [
+      {
+        type: 'paragraph',
+        content: [{ type: 'text', content: 'Hello, world' }]
+      },
+      {
+        type: 'blockquote',
+        content: [
+          {
+            type: 'paragraph',
+            content: [{ type: 'text', content: 'Some smart thoughts' }]
+          }
+        ]
+      },
+      {
+        type: 'paragraph',
+        content: [{ type: 'text', content: 'another paragraph' }]
+      },
+    ]);
+  });
+
+
   it('should split text to code-blocks', () => {
     tests([
       '```test\ntest```',

@@ -53,9 +53,13 @@ function process(lines: string[], decorators: Decorator[]): BlockToken[] {
 
     // parse blockquotes
     const blockquotes = [];
-    for (; (i < lines.length) && isBlockquote(line); i++) {
+    for (; i < lines.length; i++) {
       line = lines[i];
-      blockquotes.push(cleanBlockquote(line));
+      if (isBlockquote(line)) {
+        blockquotes.push(cleanBlockquote(line));
+      } else {
+        break;
+      }
     }
 
     if (blockquotes.length) {
@@ -63,7 +67,9 @@ function process(lines: string[], decorators: Decorator[]): BlockToken[] {
         type: 'blockquote',
         content: process(blockquotes, decorators)
       });
-    } else {
+    }
+
+    if (i < lines.length) {
       blocks.push({
         type: 'paragraph',
         content: inline(line, decorators)
