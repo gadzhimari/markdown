@@ -12,7 +12,7 @@ export const strike = createBetweenDecorator('strike', '-', true);
 
 export const link = createRegexDecorator(
   'link',
-  /(?:https?|ftp):\/\/[0-9a-z.-]+\.[a-z]{2,6}\b(?:[-a-zA-Z0-9@:%_\+.,~#!'"$?&*\/=()]*)/ig
+  /(?:https?|ftp):\/\/[0-9a-z.-]+\.[a-z]{2,6}\b(?:[-a-zA-Z0-9@:%_+.,~#!'"$?&*\/=()]*)/ig
 );
 
 export const mention = createRegexDecorator(
