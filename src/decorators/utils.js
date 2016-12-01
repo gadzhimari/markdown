@@ -5,16 +5,26 @@
 
 import type { Decorator, Range } from '../types';
 
-export function findWithRegex(regex: RegExp, text: string): Range[] {
+export function matchByRegex(regex: RegExp, text: string): Range[] {
   const ranges = [];
 
-  let matchArr, start;
-  while ((matchArr = regex.exec(text)) !== null) {
-    start = matchArr.index;
-    ranges.push({
-      start,
-      end: start + matchArr[0].length
-    });
+  let matches;
+  while ((matches = regex.exec(text)) !== null) {
+    const full = matches[0];
+
+    let start = matches.index;
+    let end = start + full.length;
+
+    if (matches.length === 2) {
+      const part = matches[1];
+
+      const startDiff = full.indexOf(part);
+      start += startDiff;
+
+      end -= full.length - (startDiff + part.length);
+    }
+
+    ranges.push({ start, end });
   }
 
   return ranges;
@@ -24,12 +34,12 @@ export function createRegexDecorator(name: string, regex: RegExp): Decorator {
   return {
     name,
     strategy(text) {
-      return findWithRegex(regex, text);
+      return matchByRegex(regex, text);
     }
   };
 }
 
-export function findBetween(char: string, text: string, replace?: boolean): Range[] {
+export function matchBetweenChar(char: string, text: string, replace?: boolean): Range[] {
   const ranges = [];
 
   let start = 0;
@@ -58,7 +68,7 @@ export function createBetweenDecorator(name: string, char: string, replace?: boo
   return {
     name,
     strategy(text) {
-      return findBetween(char, text, replace);
+      return matchBetweenChar(char, text, replace);
     }
   };
 }
