@@ -5,10 +5,22 @@
 
 import { createRegexDecorator, createBetweenDecorator } from './utils';
 
-export const bold = createBetweenDecorator('bold', '*', true);
 export const code = createBetweenDecorator('code', '`', true);
-export const italic = createBetweenDecorator('italic', '_', true);
-export const strike = createBetweenDecorator('strike', '~', true);
+
+export const bold = createRegexDecorator(
+  'bold',
+  /(?:^|[ .,#!$%^&;:{}=_`~()\/-])(\*[^*]+\*)(?:$|[ .,#!$%^&;:{}=_`~()\/-])/g
+);
+
+export const italic = createRegexDecorator(
+  'italic',
+  /(?:^|[ .,#!$%^&*;:{}=`~()\/-])(_[^_]+_)(?:$|[ .,#!$%^&*;:{}=`~()\/-])/g
+);
+
+export const strike = createRegexDecorator(
+  'strike',
+  /(?:^|[ .,#!$%^&*;:{}=_`()\/-])(~[^~]+~)(?:$|[ .,#!$%^&*;:{}=_`()\/-])/g
+);
 
 export const link = createRegexDecorator(
   'link',
