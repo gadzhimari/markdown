@@ -9,17 +9,20 @@ export const code = createBetweenDecorator('code', '`', true);
 
 export const bold = createRegexDecorator(
   'bold',
-  /(?:^|[ .,#!$%^&;:{}=_`~()\/-])(\*[^*]+\*)(?:$|[ .,#!$%^&;:{}=_`~()\/-])/g
+  /(?:^|[ .,#!$%^&;:{}=_`~()\/-])\*([^*]+)\*(?:$|[ .,#!$%^&;:{}=_`~()\/-])/g,
+  (match: string) => match.slice(1, match.length - 1)
 );
 
 export const italic = createRegexDecorator(
   'italic',
-  /(?:^|[ .,#!$%^&*;:{}=`~()\/-])(_[^_]+_)(?:$|[ .,#!$%^&*;:{}=`~()\/-])/g
+  /(?:^|[ .,#!$%^&*;:{}=`~()\/-])_([^_]+)_(?:$|[ .,#!$%^&*;:{}=`~()\/-])/g,
+  (match: string) => match.slice(1, match.length - 1)
 );
 
 export const strike = createRegexDecorator(
   'strike',
-  /(?:^|[ .,#!$%^&*;:{}=_`()\/-])(~[^~]+~)(?:$|[ .,#!$%^&*;:{}=_`()\/-])/g
+  /(?:^|[ .,#!$%^&*;:{}=_`()\/-])~([^~]+)~(?:$|[ .,#!$%^&*;:{}=_`()\/-])/g,
+  (match: string) => match.slice(1, match.length - 1)
 );
 
 export const link = createRegexDecorator(

@@ -30,8 +30,8 @@ describe('decorators utils', () => {
   describe('matchByRegex', () => {
     it('should match by regex', () => {
       expect(matchByRegex(/[a-z]+/g, 'hello world')).toEqual([
-        { start: 0, end: 5 },
-        { start: 6, end: 11 }
+        { start: 0, end: 5, replace: 'hello' },
+        { start: 6, end: 11, replace: 'world' }
       ]);
     });
 
@@ -39,20 +39,30 @@ describe('decorators utils', () => {
       expect(
         matchByRegex(/ ([a-z]+)/g, 'hello world')
       ).toEqual([
-        { start: 6, end: 11 }
+        { start: 6, end: 11, replace: 'world' }
       ]);
 
       expect(
         matchByRegex(/([a-z]+) /g, 'hello world')
       ).toEqual([
-        { start: 0, end: 5 }
+        { start: 0, end: 5, replace: 'hello' }
       ]);
 
       expect(
         matchByRegex(/ ([a-z]+) /g, ' hello world')
       ).toEqual([
-        { start: 1, end: 6 }
+        { start: 1, end: 6, replace: 'hello' }
       ]);
+    });
+
+    it('should use custom replacer', () => {
+      expect(
+        matchByRegex(/([a-z]+)/g, 'hello world', (match) => match.charAt(0))
+      ).toEqual([
+        { start: 0, end: 5, replace: 'h' },
+        { start: 6, end: 11, replace: 'w' }
+      ]);
+
     });
   });
 });

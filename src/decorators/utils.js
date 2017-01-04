@@ -5,7 +5,13 @@
 
 import type { Decorator, Range } from '../types';
 
-export function matchByRegex(regex: RegExp, text: string): Range[] {
+function identity<T>(value: T): T {
+  return value;
+}
+
+export type RegexReplacer = (match: string) => string;
+
+export function matchByRegex(regex: RegExp, text: string, replacer: RegexReplacer = identity): Range[] {
   const ranges = [];
 
   let matches;
@@ -24,17 +30,21 @@ export function matchByRegex(regex: RegExp, text: string): Range[] {
       end -= full.length - (startDiff + part.length);
     }
 
-    ranges.push({ start, end });
+    ranges.push({
+      start,
+      end,
+      replace: replacer(text.slice(start, end))
+    });
   }
 
   return ranges;
 }
 
-export function createRegexDecorator(name: string, regex: RegExp): Decorator {
+export function createRegexDecorator(name: string, regex: RegExp, replacer?: RegexReplacer): Decorator {
   return {
     name,
     strategy(text) {
-      return matchByRegex(regex, text);
+      return matchByRegex(regex, text, replacer);
     }
   };
 }
