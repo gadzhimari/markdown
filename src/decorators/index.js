@@ -21,7 +21,7 @@ export const italic = createRegexDecorator(
 
 export const strike = createRegexDecorator(
   'strike',
-  /(?:^|[ .,#!$%^&*;:{}=_`()\/-])(~[^~]+~)(?:$|[ .,#!$%^&*;:{}=_`()\/-])/g,
+  /(?:^|[ .,#!$%^&*;:{}=_`()-])(~[^~]+~)(?:$|[ .,#!$%^&*;:{}=_`()-])/g,
   (match: string) => match.slice(1, match.length - 1)
 );
 
@@ -32,7 +32,7 @@ export const link = createRegexDecorator(
 
 export const mention = createRegexDecorator(
   'mention',
-  /(?:^|[ .,#!$%^&*;:{}=_`~()\/-])(@[a-z0-9_]{5,32})/ig
+  /(?:^|[ .,#!$%^&*;:{}=_`~()\/-])(@(?:all|[a-z0-9_]{5,32}))/ig
 );
 
 const decorators = [
