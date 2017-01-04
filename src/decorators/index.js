@@ -27,7 +27,7 @@ export const strike = createRegexDecorator(
 
 export const link = createRegexDecorator(
   'link',
-  /((?:https?|ftp):\/\/\S+)(?:$|[.,!;:-])/ig
+  /((?:https?|ftp):\/\/\S+)(?:$|[.,!;:])/ig
 );
 
 export const mention = createRegexDecorator(
