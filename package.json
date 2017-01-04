@@ -20,10 +20,10 @@
   },
   "homepage": "https://github.com/dialogs/markdown#readme",
   "dependencies": {
-    "highlight.js": "9.8.0"
+    "highlight.js": "9.9.0"
   },
   "devDependencies": {
-    "@dlghq/babel-preset-dialog": "2.5.1",
-    "jest-cli": "17.0.3"
+    "@dlghq/babel-preset-dialog": "2.6.1",
+    "jest-cli": "18.1.0"
   }
 }
