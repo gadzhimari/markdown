@@ -22,5 +22,8 @@
   "devDependencies": {
     "@dlghq/babel-preset-dialog": "2.6.1",
     "jest-cli": "18.1.0"
+  },
+  "dependencies": {
+    "@dlghq/emoji": "0.4.1"
   }
 }

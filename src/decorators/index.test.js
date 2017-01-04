@@ -8,7 +8,9 @@ import {
   italic,
   strike,
   link,
-  mention
+  mention,
+  emoji,
+  namedEmoji
 } from './index';
 
 export function testDecorator(decorator, cases) {
@@ -93,6 +95,31 @@ describe('decorators', () => {
     text: '@all',
     result: [
       { start: 0, end: 4, replace: '@all' }
+    ]
+  }]);
+
+  testDecorator(emoji, [{
+    text: 'Hello, 😄!',
+    result: [
+      { start: 7, end: 9, replace: '😄' }
+    ]
+  }, {
+    text: 'Hey, 👮🏽',
+    result: [
+      { start: 5, end: 9, replace: '👮🏽' }
+    ]
+  }]);
+
+  testDecorator(namedEmoji, [{
+    text: 'Hello, :smile:! :+1:',
+    result: [
+      { start: 7, end: 14, replace: '😄' },
+      { start: 16, end: 20, replace: '👍' },
+    ]
+  }, {
+    text: 'Hey, :cop::skin-tone-4:',
+    result: [
+      { start: 5, end: 23, replace: '👮🏽' }
     ]
   }]);
 });

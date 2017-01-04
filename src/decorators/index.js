@@ -3,6 +3,7 @@
  * @flow
  */
 
+import { emoji, namedEmoji } from './emoji';
 import { createRegexDecorator, createBetweenDecorator } from './utils';
 
 export const code = createBetweenDecorator('code', '`', true);
@@ -41,7 +42,14 @@ const decorators = [
   bold,
   italic,
   strike,
-  mention
+  mention,
+  emoji,
+  namedEmoji,
 ];
+
+export {
+  emoji,
+  namedEmoji
+};
 
 export default decorators;
