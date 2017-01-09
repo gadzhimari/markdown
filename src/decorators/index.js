@@ -40,7 +40,7 @@ const decorators = [
   strike,
   mention,
   emoji,
-  namedEmoji,
+  namedEmoji
 ];
 
 export {
