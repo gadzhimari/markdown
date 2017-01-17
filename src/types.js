@@ -19,7 +19,10 @@ export type Decorator = {
 export type TextToken = {
   type: 'text',
   content: string,
-  highlight?: string
+  highlight?: string,
+  options?: {
+    [key: string]: mixed
+  }
 };
 
 export type ParagraphToken = {
