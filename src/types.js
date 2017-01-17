@@ -6,7 +6,10 @@
 export type Range = {
   start: number,
   end: number,
-  replace?: string
+  replace?: string,
+  options?: {
+    [key: string]: mixed
+  }
 };
 
 export type Strategy = (text: string) => Range[];

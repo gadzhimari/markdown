@@ -13,7 +13,7 @@ function process(tokens: TextToken[], decorator: Decorator): TextToken[] {
       const ranges = decorator.strategy(token.content);
 
       let last = 0;
-      for (const { start, end, replace } of ranges) {
+      for (const { start, end, replace, options } of ranges) {
         if (start > last) {
           result.push({
             type: 'text',
@@ -22,6 +22,7 @@ function process(tokens: TextToken[], decorator: Decorator): TextToken[] {
         }
 
         result.push({
+          options,
           type: 'text',
           content: replace || token.content.slice(start, end),
           highlight: decorator.name
