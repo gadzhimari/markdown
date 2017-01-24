@@ -6,7 +6,7 @@
 const pattern = /(?:https?|ftp):\/\/\S+/ig;
 
 function isPunctuation(text: string): boolean {
-  return (/[.,:]/).test(text);
+  return (/[.,:()]/).test(text);
 }
 
 export const link = {

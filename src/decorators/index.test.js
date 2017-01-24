@@ -84,6 +84,16 @@ describe('decorators', () => {
     result: [
       { start: 0, end: 19, replace: 'http://dialog.chat/' }
     ]
+  }, {
+    text: '(test: https://dlg.im)',
+    result: [
+      { start: 7, end: 21, replace: 'https://dlg.im' }
+    ]
+  }, {
+    text: '(https://dlg.im)',
+    result: [
+      { start: 1, end: 15, replace: 'https://dlg.im' }
+    ]
   }]);
 
   testDecorator(mention, [{
