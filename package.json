@@ -1,9 +1,11 @@
 {
   "name": "@dlghq/markdown",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "Markdown for dialog projects",
   "main": "src/index.js",
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "scripts": {
     "test": "jest",
     "preversion": "npm test",
