@@ -3,6 +3,7 @@
   "version": "0.8.2",
   "description": "Markdown for dialog projects",
   "main": "src/index.js",
+  "files": ["src"],
   "scripts": {
     "test": "jest",
     "preversion": "npm test",
