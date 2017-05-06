@@ -23,10 +23,10 @@
   },
   "homepage": "https://github.com/dialogs/markdown#readme",
   "devDependencies": {
-    "@dlghq/babel-preset-dialog": "3.2.1",
-    "jest-cli": "19.0.2"
+    "@dlghq/babel-preset-dialog": "3.3.0",
+    "jest-cli": "20.0.0"
   },
   "dependencies": {
-    "@dlghq/emoji": "0.5.2"
+    "@dlghq/emoji": "1.0.0"
   }
 }

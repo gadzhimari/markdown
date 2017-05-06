@@ -119,9 +119,9 @@ describe('decorators', () => {
       { start: 7, end: 9, replace: '😄' }
     ]
   }, {
-    text: 'Hey, 👮🏽',
+    text: 'Hey, 🤡',
     result: [
-      { start: 5, end: 9, replace: '👮🏽' }
+      { start: 5, end: 7, replace: '🤡' }
     ]
   }]);
 
@@ -134,7 +134,7 @@ describe('decorators', () => {
   }, {
     text: 'Hey, :cop::skin-tone-4:',
     result: [
-      { start: 5, end: 23, replace: '👮🏽' }
+      { start: 5, end: 23, replace: '👮🏽‍♂️' }
     ]
   }]);
 });
