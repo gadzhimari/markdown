@@ -48,6 +48,8 @@ function process(lines: string[], decorators: Decorator[]): BlockToken[] {
         });
 
         continue;
+      } else {
+        i--;
       }
     }
 

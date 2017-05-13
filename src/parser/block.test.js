@@ -106,4 +106,13 @@ describe('block parsing', () => {
       }
     ]);
   });
+
+  it('should not drop unfinished code-blocks', () => {
+    test('```', [
+      {
+        type: 'paragraph',
+        content: [{ type: 'text', content: '```' }]
+      }
+    ])
+  });
 });
