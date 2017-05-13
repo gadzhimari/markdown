@@ -2,13 +2,17 @@
   "name": "@dlghq/markdown",
   "version": "0.10.0",
   "description": "Markdown for dialog projects",
-  "main": "src/index.js",
+  "main": "lib/markdown.js",
+  "module": "lib/markdown.es.js",
+  "jsnext:main": "lib/markdown.es.js",
   "files": [
-    "src"
+    "lib"
   ],
   "scripts": {
+    "pretest": "flow",
     "test": "jest",
-    "preversion": "npm test",
+    "build": "rollup -c rollup.config.js",
+    "preversion": "npm test && npm run build",
     "postversion": "npm publish",
     "postpublish": "git push --follow-tags"
   },
@@ -23,11 +27,13 @@
   },
   "homepage": "https://github.com/dialogs/markdown#readme",
   "devDependencies": {
-    "@dlghq/babel-preset-dialog": "3.3.0",
+    "@dlghq/babel-preset-dialog": "3.4.0",
     "flow-bin": "0.46.0",
-    "jest-cli": "20.0.1"
+    "jest-cli": "20.0.1",
+    "rollup": "0.41.6",
+    "rollup-plugin-babel": "2.7.1"
   },
   "dependencies": {
-    "@dlghq/emoji": "1.0.0"
+    "@dlghq/emoji": "2.0.0"
   }
 }

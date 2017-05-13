@@ -14,9 +14,34 @@ Usage
 -----
 
 ```js
-import markdown from '@dlghq/markdown';
+import { parse, decorators } from '@dlghq/markdown';
 
-markdown('Hello, world!'); // <p>Hello, world!</p>
+console.log(parse('Hello, *world*!', decorators)); // AST
+```
+
+AST for above example would be
+
+```json
+[
+  {
+    "type": "paragraph",
+    "content": [
+      {
+        "type": "text",
+        "content": "Hello, "
+      },
+      {
+        "type": "text",
+        "content": "world",
+        "highlight": "bold"
+      },
+      {
+        "type": "text",
+        "content": "!"
+      }
+    ]
+  }
+]
 ```
 
 License
