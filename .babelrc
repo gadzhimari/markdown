@@ -1,3 +1,9 @@
 {
-  "presets": ["@dlghq/dialog"]
+  "presets": [
+    ["@dlghq/dialog", {
+      "flow": true,
+      "react": false,
+      "optimize": true
+    }]
+  ]
 }
