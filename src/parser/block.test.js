@@ -12,18 +12,18 @@ describe('block parsing', () => {
     test('Hello, world', [
       {
         type: 'paragraph',
-        content: [{ type: 'text', content: 'Hello, world' }]
+        content: [{ content: 'Hello, world' }]
       }
     ]);
 
     test('Hello, world\nHello, again', [
       {
         type: 'paragraph',
-        content: [{ type: 'text', content: 'Hello, world' }]
+        content: [{ content: 'Hello, world' }]
       },
       {
         type: 'paragraph',
-        content: [{ type: 'text', content: 'Hello, again' }]
+        content: [{ content: 'Hello, again' }]
       },
     ]);
   });
@@ -39,7 +39,7 @@ describe('block parsing', () => {
         content: [
           {
             type: 'paragraph',
-            content: [{ type: 'text', content: 'Hello, world' }]
+            content: [{ content: 'Hello, world' }]
           }
         ]
       }
@@ -62,7 +62,7 @@ describe('block parsing', () => {
             content: [
               {
                 type: 'paragraph',
-                content: [{ type: 'text', content: 'Hello, world' }]
+                content: [{ content: 'Hello, world' }]
               }
             ]
           }
@@ -75,20 +75,20 @@ describe('block parsing', () => {
     test('Hello, world\n> Some smart thoughts\nanother paragraph', [
       {
         type: 'paragraph',
-        content: [{ type: 'text', content: 'Hello, world' }]
+        content: [{ content: 'Hello, world' }]
       },
       {
         type: 'blockquote',
         content: [
           {
             type: 'paragraph',
-            content: [{ type: 'text', content: 'Some smart thoughts' }]
+            content: [{ content: 'Some smart thoughts' }]
           }
         ]
       },
       {
         type: 'paragraph',
-        content: [{ type: 'text', content: 'another paragraph' }]
+        content: [{ content: 'another paragraph' }]
       },
     ]);
   });
@@ -111,7 +111,7 @@ describe('block parsing', () => {
     test('```', [
       {
         type: 'paragraph',
-        content: [{ type: 'text', content: '```' }]
+        content: [{ content: '```' }]
       }
     ])
   });

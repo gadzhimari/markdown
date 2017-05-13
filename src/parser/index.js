@@ -4,6 +4,9 @@
  */
 
 import parse from './block';
+import parseInline from './inline';
 
-
-export default parse;
+export {
+  parse,
+  parseInline
+};

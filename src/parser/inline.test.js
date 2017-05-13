@@ -11,7 +11,6 @@ describe('inline parsing', () => {
   it('should convert text to token list', () => {
     expect(parse('Hello, world')).toEqual([
       {
-        type: 'text',
         content: 'Hello, world'
       }
     ]);
@@ -30,26 +29,22 @@ describe('inline parsing', () => {
 
     expect(parse('0123456789', [test])).toEqual([
       {
-        type: 'text',
         content: '01'
       },
       {
-        type: 'text',
         content: '234',
         highlight: 'test'
       },
       {
-        type: 'text',
         content: '567'
       },
       {
-        type: 'text',
         content: '89',
         highlight: 'test'
       }
     ]);
   });
-  
+
   it('should supports replace', () => {
     const test = {
       name: 'test',
@@ -63,20 +58,16 @@ describe('inline parsing', () => {
 
     expect(parse('0123456789', [test])).toEqual([
       {
-        type: 'text',
         content: '01'
       },
       {
-        type: 'text',
         content: 'hello',
         highlight: 'test'
       },
       {
-        type: 'text',
         content: '567'
       },
       {
-        type: 'text',
         content: 'world',
         highlight: 'test'
       }

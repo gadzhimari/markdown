@@ -3,42 +3,37 @@
  * @flow
  */
 
-export type Range = {
+export type TokenOptions = { [key: string]: mixed };
+
+export interface Range {
   start: number,
   end: number,
   replace?: string,
-  options?: {
-    [key: string]: mixed
-  }
+  options?: TokenOptions
 };
 
-export type Strategy = (text: string) => Range[];
-
-export type Decorator = {
+export interface Decorator {
   name: string,
-  strategy: Strategy
+  strategy(text: string): Range[]
 };
 
-export type TextToken = {
-  type: 'text',
+export interface TextToken {
   content: string,
   highlight?: string,
-  options?: {
-    [key: string]: mixed
-  }
+  options?: ?TokenOptions
 };
 
-export type ParagraphToken = {
+export interface ParagraphToken {
   type: 'paragraph',
   content: TextToken[]
 };
 
-export type CodeBlockToken = {
+export interface CodeBlockToken {
   type: 'code_block',
   content: string
 };
 
-export type BlockquoteToken = {
+export interface BlockquoteToken {
   type: 'blockquote',
   content: BlockToken[]
 };

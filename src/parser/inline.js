@@ -8,7 +8,7 @@ import type { TextToken, Range, Decorator } from '../types';
 function process(tokens: TextToken[], decorator: Decorator): TextToken[] {
   const result = [];
   for (const token of tokens) {
-    if (token.type === 'text' && !token.highlight) {
+    if (!token.highlight) {
       // todo: check in dev mode, ranges are sorted
       const ranges = decorator.strategy(token.content);
 
@@ -16,14 +16,12 @@ function process(tokens: TextToken[], decorator: Decorator): TextToken[] {
       for (const { start, end, replace, options } of ranges) {
         if (start > last) {
           result.push({
-            type: 'text',
             content: token.content.slice(last, start)
           })
         }
 
         result.push({
           options,
-          type: 'text',
           content: replace || token.content.slice(start, end),
           highlight: decorator.name
         });
@@ -33,7 +31,6 @@ function process(tokens: TextToken[], decorator: Decorator): TextToken[] {
 
       if (last < token.content.length) {
         result.push({
-          type: 'text',
           content: token.content.slice(last)
         });
       }
@@ -46,7 +43,7 @@ function process(tokens: TextToken[], decorator: Decorator): TextToken[] {
 }
 
 function parse(text: string, decorators: Decorator[] = []): TextToken[] {
-  let tokens = [{ type: 'text', content: text }];
+  let tokens = [{ content: text }];
 
   for (const decorator of decorators) {
     tokens = process(tokens, decorator);
