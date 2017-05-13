@@ -3,10 +3,40 @@
  * @flow
  */
 
-const pattern = /(?:https?|ftp):\/\/\S+/ig;
+const pattern = /(?:\[(.+)\]\()?((?:https?|ftp):\/\/\S+)/ig;
 
-function isPunctuation(text: string): boolean {
-  return (/[.,:()]/).test(text);
+function isPunctuation(char: string): boolean {
+  return char === '.' || char === ',' || char === ':';
+}
+
+function indexOf(text: string, char: string, startIndex: number, endIndex: number): number {
+  for (let i = startIndex; i <= endIndex; i++) {
+    if (text.charAt(i) === char) {
+      return i;
+    }
+  }
+
+  return -1;
+}
+
+function getBraceDepth(text: string): number {
+  let depth = 0;
+  let prevOpenIndex = 0;
+  for (let i = text.length - 1; i >= 0; i--) {
+    const char = text.charAt(i);
+    if (char === ')') {
+      const openIndex = indexOf(text, '(', prevOpenIndex + 1, i);
+      if (openIndex === -1) {
+        depth += 1;
+      } else {
+        prevOpenIndex = openIndex;
+      }
+    } else {
+      break;
+    }
+  }
+
+  return depth;
 }
 
 export const link = {
@@ -16,11 +46,33 @@ export const link = {
 
     let matches;
     while ((matches = pattern.exec(text)) !== null) {
-      const link = matches[0];
+      const name = matches[1];
+
+      let link = matches[2];
+      const braceDepth = getBraceDepth(link);
+      if (braceDepth > 0) {
+        if (name) {
+          link = link.slice(0, link.length - braceDepth + 1);
+        } else {
+          link = link.slice(0, link.length - braceDepth);
+        }
+      }
+
       const start = matches.index;
       const end = start + link.length;
 
-      if (isPunctuation(link.charAt(link.length - 1))) {
+      const lastLinkChar = link.charAt(link.length - 1);
+
+      if (name && lastLinkChar === ')') {
+        ranges.push({
+          start,
+          end: end + name.length + 3,
+          replace: name,
+          options: {
+            url: link.slice(0, link.length - 1)
+          }
+        });
+      } else if (isPunctuation(lastLinkChar)) {
         ranges.push({
           start,
           end: end - 1,

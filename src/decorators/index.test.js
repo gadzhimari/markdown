@@ -23,6 +23,8 @@ export function testDecorator(decorator, cases) {
   });
 }
 
+const longKibanaLink = `https://kibana.com/app/kibana#/discover?_g=()&_a=(columns:!(_source),index:'logstash-*',interval:auto,query:(query_string:(analyze_wildcard:!t,query:'*')),sort:!('@timestamp',desc))`;
+
 describe('decorators', () => {
   testDecorator(code, [{
     text: '`code`',
@@ -93,6 +95,36 @@ describe('decorators', () => {
     text: '(https://dlg.im)',
     result: [
       { start: 1, end: 15, replace: 'https://dlg.im' }
+    ]
+  }, {
+    text: '(test: [Dialog](https://dlg.im))',
+    result: [
+      { start: 7, end: 31, replace: 'Dialog', options: { url: 'https://dlg.im' } }
+    ]
+  }, {
+    text: '(test: https://dlg.im/foo(test))',
+    result: [
+      { start: 7, end: 31, replace: 'https://dlg.im/foo(test)' }
+    ]
+  }, {
+    text: longKibanaLink,
+    result: [
+      { start: 0, end: longKibanaLink.length, replace: longKibanaLink }
+    ]
+  }, {
+    text: 'https://dlg.im/foo))hello',
+    result: [
+      { start: 0, end: 25, replace: 'https://dlg.im/foo))hello' }
+    ]
+  }, {
+    text: 'https://dlg.im/foo((hello',
+    result: [
+      { start: 0, end: 25, replace: 'https://dlg.im/foo((hello' }
+    ]
+  }, {
+    text: 'https://dlg.im/foohello))',
+    result: [
+      { start: 0, end: 23, replace: 'https://dlg.im/foohello' }
     ]
   }]);
 
