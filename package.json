@@ -24,7 +24,8 @@
   "homepage": "https://github.com/dialogs/markdown#readme",
   "devDependencies": {
     "@dlghq/babel-preset-dialog": "3.3.0",
-    "jest-cli": "20.0.0"
+    "flow-bin": "0.46.0",
+    "jest-cli": "20.0.1"
   },
   "dependencies": {
     "@dlghq/emoji": "1.0.0"
