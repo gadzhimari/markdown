@@ -1,6 +1,6 @@
 {
   "name": "@dlghq/markdown",
-  "version": "0.10.0",
+  "version": "1.0.0",
   "description": "Markdown for dialog projects",
   "main": "lib/markdown.js",
   "module": "lib/markdown.es.js",
