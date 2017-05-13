@@ -4,6 +4,3 @@ npm-debug.log
 
 # Yarn
 yarn.lock
-
-# Build
-lib/

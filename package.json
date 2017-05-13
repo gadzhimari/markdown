@@ -2,18 +2,14 @@
   "name": "@dlghq/markdown",
   "version": "1.0.1",
   "description": "Markdown for dialog projects",
-  "main": "lib/markdown.js",
-  "module": "src/index.js",
+  "main": "src/markdown.js",
   "files": [
-    "lib",
     "src"
   ],
   "scripts": {
     "pretest": "flow",
     "test": "jest",
-    "prebuild": "rm -rf lib/",
-    "build": "babel --ignore **/*.test.js -d lib/ src/",
-    "preversion": "npm test && npm run build",
+    "preversion": "npm test",
     "postversion": "npm publish",
     "postpublish": "git push --follow-tags"
   },
@@ -29,7 +25,6 @@
   "homepage": "https://github.com/dialogs/markdown#readme",
   "devDependencies": {
     "@dlghq/babel-preset-dialog": "3.4.0",
-    "babel-cli": "6.24.1",
     "flow-bin": "0.46.0",
     "jest-cli": "20.0.1"
   },
