@@ -1,5 +1,6 @@
 Markdown
 ========
+[![Build Status](https://circleci.com/gh/dialogs/markdown.svg?style=shield)](https://circleci.com/gh/dialogs/markdown)
 
 Markdown for dialog projects
 
