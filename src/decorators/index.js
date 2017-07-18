@@ -32,12 +32,18 @@ export const mention = createRegexDecorator(
   /(?:^|[ .,#!$%^&*;:{}=_`~()\/-])(@(?:all|[a-z0-9_]{5,32}))/ig
 );
 
+export const email = createRegexDecorator(
+  'email',
+  /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/g
+);
+
 const decorators = [
   code,
   link,
   bold,
   italic,
   strike,
+  email,
   mention,
   emoji,
   namedEmoji

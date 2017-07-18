@@ -7,6 +7,7 @@ import {
   bold,
   italic,
   strike,
+  email,
   link,
   mention,
   emoji,
@@ -69,6 +70,18 @@ describe('decorators', () => {
   }, {
     text: 'some~strike~value',
     result: []
+  }]);
+
+  testDecorator(email, [{
+    text: 'foo@example.com',
+    result: [
+      { start: 0, end: 15, replace: 'foo@example.com' }
+    ]
+  }, {
+    text: 'Hello, (foo@bar.baz)',
+    result: [
+      { start: 8, end: 19, replace: 'foo@bar.baz' }
+    ]
   }]);
 
   testDecorator(link, [{
