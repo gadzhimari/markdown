@@ -1,6 +1,6 @@
 {
   "name": "@dlghq/markdown",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Markdown for dialog projects",
   "main": "src/index.js",
   "files": [
