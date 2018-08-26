@@ -14,8 +14,7 @@ export type RegexReplacer = (match: string) => string;
 export function matchByRegex(regex: RegExp, text: string, replacer: RegexReplacer = identity): Range[] {
   const ranges = [];
 
-  let matches;
-  while ((matches = regex.exec(text)) !== null) {
+  for (let matches = regex.exec(text); matches !== null; matches = regex.exec(text)) {
     const full = matches[0];
 
     let start = matches.index;

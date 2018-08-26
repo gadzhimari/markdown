@@ -45,7 +45,7 @@ export const link = {
     const ranges = [];
 
     let matches;
-    while ((matches = pattern.exec(text)) !== null) {
+    for (let matches = pattern.exec(text); matches !== null; matches = pattern.exec(text)) {
       const name = matches[1];
 
       let link = matches[2];
