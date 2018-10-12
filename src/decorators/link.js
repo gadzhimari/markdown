@@ -3,7 +3,7 @@
  * @flow
  */
 
-const pattern = /(?:\[(.+)\]\()?((?:https?|ftp):\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b(?:[-a-zA-Z0-9@:%_\+.~#?&\/\/=():!,\'\'\*]*))/ig;
+const pattern = /(?:\[(.+)\]\()?((?:https?|ftp):\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-z]{2,6}\b(?:[-a-zA-Z0-9@:%_\+.~#?&\/\/=():!,\'\'\*]*))/ig;
 
 function isPunctuation(char: string): boolean {
   return char === '.' || char === ',' || char === ':';
