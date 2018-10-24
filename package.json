@@ -32,10 +32,10 @@
   "homepage": "https://github.com/dialogs/markdown#readme",
   "devDependencies": {
     "@dlghq/babel-preset-dialog": "3.4.3",
-    "flow-bin": "0.79.1",
-    "jest-cli": "23.5.0"
+    "flow-bin": "0.83.0",
+    "jest-cli": "23.6.0"
   },
   "dependencies": {
-    "@dlghq/emoji": "2.0.1"
+    "@dlghq/emoji": "2.2.0"
   }
 }
