@@ -139,6 +139,21 @@ describe('decorators', () => {
     result: [
       { start: 0, end: 23, replace: 'https://dlg.im/foohello' }
     ]
+  }, {
+    text: 'You changed the group about to "https://dlg.im/en/"',
+    result:[
+      {start: 32, end: 32 + 'https://dlg.im/en/'.length, replace: 'https://dlg.im/en/'}
+    ]
+  }, {
+    text: 'You changed the group about to "https://a.yandex"',
+    result:[
+      {start: 32, end: 32 + 'https://a.yandex'.length, replace: 'https://a.yandex'}
+    ]
+  }, {
+    text: 'https://a.yandex',
+    result:[
+      {start: 0, end: 'https://a.yandex'.length, replace: 'https://a.yandex'}
+    ]
   }]);
 
   testDecorator(mention, [{
