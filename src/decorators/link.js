@@ -3,13 +3,18 @@
  * @flow
  */
 
-const pattern = /(?:\[(.+)\]\()?((?:https?|ftp):\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-z]{2,6}\b(?:[-a-zA-Z0-9@:%_\+.~#?&\/\/=():!,\'\'\*]*))/ig;
+const pattern = /(?:\[(.+)\]\()?((?:https?|ftp):\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-z]{2,6}\b(?:[-a-zA-Z0-9@:%_\+.~#?&\/\/=():!,\'\'\*]*))/gi;
 
 function isPunctuation(char: string): boolean {
   return char === '.' || char === ',' || char === ':';
 }
 
-function indexOf(text: string, char: string, startIndex: number, endIndex: number): number {
+function indexOf(
+  text: string,
+  char: string,
+  startIndex: number,
+  endIndex: number,
+): number {
   for (let i = startIndex; i <= endIndex; i++) {
     if (text.charAt(i) === char) {
       return i;
@@ -45,7 +50,11 @@ export const link = {
     const ranges = [];
 
     let matches;
-    for (let matches = pattern.exec(text); matches !== null; matches = pattern.exec(text)) {
+    for (
+      let matches = pattern.exec(text);
+      matches !== null;
+      matches = pattern.exec(text)
+    ) {
       const name = matches[1];
 
       let link = matches[2];
@@ -69,24 +78,24 @@ export const link = {
           end: end + name.length + 3,
           replace: name,
           options: {
-            url: link.slice(0, link.length - 1)
-          }
+            url: link.slice(0, link.length - 1),
+          },
         });
       } else if (isPunctuation(lastLinkChar)) {
         ranges.push({
           start,
           end: end - 1,
-          replace: link.slice(0, link.length - 1)
+          replace: link.slice(0, link.length - 1),
         });
       } else {
         ranges.push({
           start,
           end,
-          replace: link
+          replace: link,
         });
       }
     }
 
     return ranges;
-  }
+  },
 };

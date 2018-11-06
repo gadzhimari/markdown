@@ -5,8 +5,4 @@
 import { parse, parseInline } from './parser/index';
 import decorators from './decorators/index';
 
-export {
-  parse,
-  decorators,
-  parseInline
-};
+export { parse, decorators, parseInline };
