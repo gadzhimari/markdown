@@ -154,7 +154,27 @@ describe('decorators', () => {
     result:[
       {start: 0, end: 'https://a.yandex'.length, replace: 'https://a.yandex'}
     ]
-  }]);
+  }], {
+    text: 'dlg.im',
+    result:[
+      {start: 0, end: 'dlg.im'.length, replace: 'dlg.im'}
+    ]
+  }, {
+    text: 'dlg.im/',
+    result:[
+      {start: 0, end: 'www.dlg.im/'.length, replace: 'www.dlg.im/'}
+    ]
+  }, {
+    text: 'www.dlg.im',
+    result:[
+      {start: 0, end: 'www.dlg.im'.length, replace: 'www.dlg.im'}
+    ]
+  }, {
+    text: 'налог.рф',
+    result:[
+      {start: 0, end: 'налог.рф'.length, replace: 'налог.рф'}
+    ]
+  });
 
   testDecorator(mention, [{
     text: '@gusnkt',
