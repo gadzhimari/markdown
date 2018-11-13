@@ -3,7 +3,10 @@
  * @flow
  */
 
-const pattern = /(?:\[(.+)\]\()?((?:(?:https?|ftps?):\/\/)?(?:www\.)?[-а-яёa-z0-9]+\.[а-яёa-z]{2,6}(?:[-а-яёa-z0-9._~:\/\?#\[\]@!$&'()\*\+,;=%]+)?)/ig;
+import tlds from 'tlds';
+
+const domains = new Set(tlds);
+const pattern = /(?:\[(.+)\]\()?((?:(?:https?):\/\/)?(?:www\.)?[-а-яёa-z0-9]+\.([а-яёa-z]{2,6})(?:[-а-яёa-z0-9._~:\/\?#\[\]@!$&'()\*\+,;=%]+)?)/ig;
 
 function isPunctuation(char: string): boolean {
   return char === '.' || char === ',' || char === ':';
@@ -39,6 +42,14 @@ function getBraceDepth(text: string): number {
   return depth;
 }
 
+function normalizeUrl(url: string): string {
+  if (url.search(/^https?:\/\//) === -1) {
+    return `http://${url}`;
+  }
+
+  return url;
+}
+
 export const link = {
   name: 'link',
   strategy(text: string) {
@@ -46,9 +57,13 @@ export const link = {
 
     let matches;
     for (let matches = pattern.exec(text); matches !== null; matches = pattern.exec(text)) {
-      const name = matches[1];
+      const [, name, url, domain] = matches;
 
-      let link = matches[2];
+      if (!domains.has(domain)) {
+        continue;
+      }
+
+      let link = normalizeUrl(url);
       const braceDepth = getBraceDepth(link);
       if (braceDepth > 0) {
         if (name) {
