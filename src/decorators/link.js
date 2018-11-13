@@ -42,12 +42,12 @@ function getBraceDepth(text: string): number {
   return depth;
 }
 
-function normalizeUrl(url: string): string {
-  if (url.search(/^https?:\/\//) === -1) {
-    return `http://${url}`;
-  }
+function urlHasHttps(url: string): boolean {
+  return url.search(/^https?:\/\//i) !== -1;
+}
 
-  return url;
+function normalizeUrl(url: string): string {
+  return urlHasHttps(url) ? url : `http://${url}`;
 }
 
 export const link = {
@@ -63,7 +63,7 @@ export const link = {
         continue;
       }
 
-      let link = normalizeUrl(url);
+      let link = url;
       const braceDepth = getBraceDepth(link);
       if (braceDepth > 0) {
         if (name) {
@@ -84,20 +84,30 @@ export const link = {
           end: end + name.length + 3,
           replace: name,
           options: {
-            url: link.slice(0, link.length - 1)
+            url: normalizeUrl(link.slice(0, link.length - 1))
           }
         });
       } else if (isPunctuation(lastLinkChar)) {
         ranges.push({
           start,
           end: end - 1,
-          replace: link.slice(0, link.length - 1)
+          replace: link.slice(0, link.length - 1),
+          ...(urlHasHttps(link) ? {} : {
+            options: {
+              url: normalizeUrl(link.slice(0, link.length - 1)),
+            }
+          })
         });
       } else {
         ranges.push({
           start,
           end,
-          replace: link
+          replace: link,
+          ...(urlHasHttps(link) ? {} : {
+            options: {
+              url: normalizeUrl(link),
+            }
+          })
         });
       }
     }
