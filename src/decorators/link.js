@@ -6,7 +6,7 @@
 import tlds from 'tlds';
 
 const domains = new Set(tlds);
-const pattern = /(?:\[(.+)\]\()?((?:(?:https?):\/\/)?(?:www\.)?[-а-яёa-z0-9]+\.([а-яёa-z]{2,6})(?:[-а-яёa-z0-9._~:\/\?#\[\]@!$&'()\*\+,;=%]+)?)/ig;
+const pattern = /(?:\[(.+)\]\()?((?:(https?):\/\/)?(?:www\.)?[-а-яёa-z0-9]+\.([а-яёa-z]{2,6})(?:[-а-яёa-z0-9._~:\/\?#\[\]@!$&'()\*\+,;=%]+)?)/ig;
 
 function isPunctuation(char: string): boolean {
   return char === '.' || char === ',' || char === ':';
@@ -42,12 +42,8 @@ function getBraceDepth(text: string): number {
   return depth;
 }
 
-function urlHasHttps(url: string): boolean {
-  return url.search(/^https?:\/\//i) !== -1;
-}
-
 function normalizeUrl(url: string): string {
-  return urlHasHttps(url) ? url : `http://${url}`;
+  return `http://${url}`;
 }
 
 export const link = {
@@ -57,7 +53,7 @@ export const link = {
 
     let matches;
     for (let matches = pattern.exec(text); matches !== null; matches = pattern.exec(text)) {
-      const [, name, url, domain] = matches;
+      const [, name, url, protocol, domain] = matches;
 
       if (!domains.has(domain)) {
         continue;
@@ -79,12 +75,14 @@ export const link = {
       const lastLinkChar = link.charAt(link.length - 1);
 
       if (name && lastLinkChar === ')') {
+        const rawUrl = link.slice(0, link.length - 1);
+
         ranges.push({
           start,
           end: end + name.length + 3,
           replace: name,
           options: {
-            url: normalizeUrl(link.slice(0, link.length - 1))
+            url: protocol ? rawUrl : normalizeUrl(rawUrl)
           }
         });
       } else if (isPunctuation(lastLinkChar)) {
@@ -92,7 +90,7 @@ export const link = {
           start,
           end: end - 1,
           replace: link.slice(0, link.length - 1),
-          ...(urlHasHttps(link) ? {} : {
+          ...(protocol ? {} : {
             options: {
               url: normalizeUrl(link.slice(0, link.length - 1)),
             }
@@ -103,7 +101,7 @@ export const link = {
           start,
           end,
           replace: link,
-          ...(urlHasHttps(link) ? {} : {
+          ...(protocol ? {} : {
             options: {
               url: normalizeUrl(link),
             }
